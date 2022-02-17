@@ -12,27 +12,15 @@ interface HomeProps {
   movies: IMovie[];
 }
 
-interface IMovieImage {
-  src: string;
-}
-
 export default function Home({ movies }: HomeProps) {
   return (
     <div className="container">
       <Seo title="Home" />
       {movies.map((movie: IMovie) => (
         <div className="movie" key={movie.id}>
-          <Image
-            loader={({ src }: IMovieImage) =>
-              `https://image.tmdb.org/t/p/w500${src}`
-            }
-            src={`${movie.poster_path}`}
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={`${movie.title}`}
-            width={"100%"}
-            height={"100%"}
-            objectFit="contain"
-            layout="responsive"
-            priority={true}
           />
           <h4>{movie.title}</h4>
         </div>
@@ -44,18 +32,24 @@ export default function Home({ movies }: HomeProps) {
           padding: 20px;
           gap: 20px;
         }
-        .movie img {
-          max-width: 100%;
-          border-radius: 12px;
-          transition: transform 0.2s ease-in-out;
-          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-        }
-        .movie:hover img {
-          transform: scale(1.05) translateY(-10px);
-        }
-        .movie h4 {
-          font-size: 18px;
-          text-align: center;
+        .movie {
+          cursor: pointer;
+
+          img {
+            max-width: 100%;
+            border-radius: 12px;
+            transition: transform 0.2s ease-in-out;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+            &:hover {
+              transform: scale(1.05) translateY(-10px);
+            }
+          }
+
+          h4 {
+            font-size: 18px;
+            text-align: center;
+          }
         }
       `}</style>
     </div>
