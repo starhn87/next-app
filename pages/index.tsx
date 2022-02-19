@@ -40,6 +40,7 @@ export default function Home({ movies }: HomeProps) {
           </h4>
         </div>
       ))}
+      z
       <style jsx>{`
         .container {
           display: grid;
